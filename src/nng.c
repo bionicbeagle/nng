@@ -1900,3 +1900,27 @@ nng_version(void)
 	return (xstr(NNG_MAJOR_VERSION) "." xstr(NNG_MINOR_VERSION) "." xstr(
 	    NNG_PATCH_VERSION) NNG_RELEASE_SUFFIX);
 }
+
+void
+nng_set_ncpu_max(int limit)
+{
+	nni_thr_set_core_limit(limit);
+}
+ 
+void
+nng_set_pool_thread_limit_min(int limit)
+{
+	nni_thr_set_pool_thread_limit_min(limit);
+}
+
+void
+nng_set_pool_thread_limit_max(int limit)
+{
+	nni_thr_set_pool_thread_limit_max(limit);
+}
+
+void
+nng_set_resolve_thread_max(int limit)
+{
+	nni_set_resolve_thread_max(limit);
+}

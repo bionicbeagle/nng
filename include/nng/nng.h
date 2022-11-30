@@ -1179,6 +1179,11 @@ NNG_DECL int nng_stream_listener_set_ptr(
 NNG_DECL int nng_stream_listener_set_addr(
     nng_stream_listener *, const char *, const nng_sockaddr *);
 
+#define NNG_CAN_LIMIT_THREADS
+NNG_DECL void nng_set_ncpu_max(int);
+NNG_DECL void nng_set_pool_thread_limit_min(int);
+NNG_DECL void nng_set_pool_thread_limit_max(int);
+NNG_DECL void nng_set_resolve_thread_max(int);
 
 #ifndef NNG_ELIDE_DEPRECATED
 // These are legacy APIs that have been deprecated.

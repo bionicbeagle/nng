@@ -793,12 +793,13 @@ nni_aio_sys_init(void)
 	// We create a thread per CPU core for expiration by default.
 #ifndef NNG_EXPIRE_THREADS
 	num_thr = nni_plat_ncpu();
+
+	if (num_thr > nni_thr_get_pool_thread_limit_max()) {
+		num_thr = nni_thr_get_pool_thread_limit_max();
+	}
 #else
 	num_thr = NNG_EXPIRE_THREADS;
 #endif
-	if (num_thr > 256) {
-		num_thr = 256;
-	}
 
 	nni_aio_expire_q_list =
 	    nni_zalloc(sizeof(nni_aio_expire_q *) * num_thr);

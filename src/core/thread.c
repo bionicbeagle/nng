@@ -173,3 +173,45 @@ nni_thr_set_name(nni_thr *thr, const char *name)
 {
 	nni_plat_thr_set_name(thr != NULL ? &thr->thr : NULL, name);
 }
+
+static int nni_core_limit = 256;
+static int nni_pool_thread_limit_min = 2;
+static int nni_pool_thread_limit_max = 64;
+
+void
+nni_thr_set_core_limit(int limit)
+{
+	nni_core_limit = limit;
+}
+
+int
+nni_thr_get_core_limit()
+{
+	return nni_core_limit;
+}
+
+// nni_set_core_limit can be used to limit how many threads nng tries to use 
+// for a single thread pool
+void
+nni_thr_set_pool_thread_limit_min(int limit)
+{
+	nni_pool_thread_limit_min = limit;
+}
+
+int
+nni_thr_get_pool_thread_limit_min()
+{
+	return nni_pool_thread_limit_min;
+}
+
+void
+nni_thr_set_pool_thread_limit_max(int limit)
+{
+	nni_pool_thread_limit_max = limit;
+}
+
+int
+nni_thr_get_pool_thread_limit_max()
+{
+	return nni_pool_thread_limit_max;
+}

@@ -440,6 +440,14 @@ nni_parse_ip_port(const char *addr, nni_sockaddr *sa)
 	return (parse_ip(addr, sa, true));
 }
 
+static int nng_resolv_concurrency = NNG_RESOLV_CONCURRENCY;
+
+void
+nni_set_resolve_thread_max(int limit)
+{
+	nng_resolv_concurrency = limit;
+}
+
 int
 nni_posix_resolv_sysinit(void)
 {

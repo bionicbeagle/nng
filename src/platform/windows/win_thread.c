@@ -393,9 +393,17 @@ int
 nni_plat_ncpu(void)
 {
 	SYSTEM_INFO info;
+	int core_limit = nni_thr_get_core_limit();
+	int n = 0;
 
 	GetSystemInfo(&info);
-	return ((int) (info.dwNumberOfProcessors));
+	n = ((int) (info.dwNumberOfProcessors));
+
+	if (n > core_limit) {
+		return core_limit;
+	} else {
+		return n;
+	}
 }
 
 int

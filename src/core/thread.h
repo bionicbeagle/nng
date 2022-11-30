@@ -82,4 +82,16 @@ extern bool nni_thr_is_self(nni_thr *thr);
 // nni_thr_set_name is used to set a short name for the thread.
 extern void nni_thr_set_name(nni_thr *thr, const char *);
 
+// nni_set_core_limit can be used to limit how many threads nng tries to use
+extern void nni_thr_set_core_limit(int);
+extern int nni_thr_get_core_limit();
+
+// nni_set_core_limit can be used to limit how many threads nng tries to use 
+// for a single thread pool
+extern void nni_thr_set_pool_thread_limit_min(int);
+extern int nni_thr_get_pool_thread_limit_min();
+
+extern void nni_thr_set_pool_thread_limit_max(int);
+extern int nni_thr_get_pool_thread_limit_max();
+
 #endif // CORE_THREAD_H

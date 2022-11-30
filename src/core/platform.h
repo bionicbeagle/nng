@@ -356,6 +356,9 @@ extern int nni_parse_ip(const char *, nng_sockaddr *);
 // nni_parse_ip_port parses an IP address with an optional port appended.
 extern int nni_parse_ip_port(const char *, nng_sockaddr *);
 
+// nni_set_resolve_thread_max is used to configure the resolve thread pool
+extern void nni_set_resolve_thread_max(int);
+
 //
 // IPC (UNIX Domain Sockets & Named Pipes) Support.
 //

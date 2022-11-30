@@ -405,6 +405,14 @@ nni_parse_ip_port(const char *addr, nni_sockaddr *sa)
 	return (parse_ip(addr, sa, true));
 }
 
+static int nng_resolv_concurrency = NNG_RESOLV_CONCURRENCY;
+
+void
+nni_set_resolve_thread_max(int limit)
+{
+	nng_resolv_concurrency = limit;
+}
+
 int
 nni_win_resolv_sysinit(void)
 {
@@ -413,7 +421,7 @@ nni_win_resolv_sysinit(void)
 	nni_aio_list_init(&resolv_aios);
 
 	resolv_fini = false;
-	for (int i = 0; i < NNG_RESOLV_CONCURRENCY; i++) {
+	for (int i = 0; i < nng_resolv_concurrency; i++) {
 		int rv = nni_thr_init(&resolv_thrs[i], resolv_worker, NULL);
 		if (rv != 0) {
 			nni_win_resolv_sysfini();

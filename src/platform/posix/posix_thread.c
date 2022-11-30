@@ -444,14 +444,21 @@ nni_plat_fini(void)
 int
 nni_plat_ncpu(void)
 {
+	int system_proc_count = 1;
+	int proc_limit = nni_thr_get_core_limit();
+
 	// POSIX specifies sysconf exists, but not the value
 	// _SC_NPROCESSORS_ONLN.  Nonetheless, everybody implements it.
 	// If you don't we'll assume you only have a single logical CPU.
 #ifdef _SC_NPROCESSORS_ONLN
-	return (sysconf(_SC_NPROCESSORS_ONLN));
-#else
-	return (1);
+	system_proc_count = (sysconf(_SC_NPROCESSORS_ONLN));
 #endif
+
+	if (system_proc_count > proc_limit) {
+		return proc_limit;
+	} else {
+		return system_proc_count;
+	}
 }
 
 #endif // NNG_PLATFORM_POSIX

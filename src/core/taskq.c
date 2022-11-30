@@ -238,7 +238,14 @@ nni_taskq_sys_init(void)
 	int nthrs;
 
 #ifndef NNG_NUM_TASKQ_THREADS
-	nthrs = nni_plat_ncpu() * 2;
+	nthrs = nni_plat_ncpu();
+
+	if (nthrs > nni_thr_get_pool_thread_limit_max()) {
+		nthrs = nni_thr_get_pool_thread_limit_max();
+	}
+	if (nthrs < nni_thr_get_pool_thread_limit_min()) {
+		nthrs = nni_thr_get_pool_thread_limit_min();
+	}
 #else
 	nthrs = NNG_NUM_TASKQ_THREADS;
 #endif

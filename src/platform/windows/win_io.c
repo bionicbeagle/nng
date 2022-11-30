@@ -89,14 +89,14 @@ nni_win_io_sysinit(void)
 	HANDLE h;
 	int    i;
 	int    rv;
-	int    nthr = nni_plat_ncpu() * 2;
+	int    nthr = nni_plat_ncpu();
 
 	// Limits on the thread count.  This is fairly arbitrary.
-	if (nthr < 4) {
-		nthr = 4;
+	if (nthr < nni_thr_get_pool_thread_limit_min()) {
+		nthr = nni_thr_get_pool_thread_limit_min();
 	}
-	if (nthr > 64) {
-		nthr = 64;
+	if (nthr > nni_thr_get_pool_thread_limit_max()) {
+		nthr = nni_thr_get_pool_thread_limit_max();
 	}
 	if ((win_io_thrs = NNI_ALLOC_STRUCTS(win_io_thrs, nthr)) == NULL) {
 		return (NNG_ENOMEM);
