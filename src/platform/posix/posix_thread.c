@@ -445,7 +445,7 @@ int
 nni_plat_ncpu(void)
 {
 	int system_proc_count = 1;
-	int proc_limit = nni_thr_get_core_limit();
+	int proc_limit = nni_thr_get_ncpu_max();
 
 	// POSIX specifies sysconf exists, but not the value
 	// _SC_NPROCESSORS_ONLN.  Nonetheless, everybody implements it.

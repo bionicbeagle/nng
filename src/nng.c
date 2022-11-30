@@ -1904,7 +1904,7 @@ nng_version(void)
 void
 nng_set_ncpu_max(int limit)
 {
-	nni_thr_set_core_limit(limit);
+	nni_thr_set_ncpu_max(limit);
 }
  
 void

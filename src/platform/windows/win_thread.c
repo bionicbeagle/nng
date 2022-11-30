@@ -393,7 +393,7 @@ int
 nni_plat_ncpu(void)
 {
 	SYSTEM_INFO info;
-	int core_limit = nni_thr_get_core_limit();
+	int core_limit = nni_thr_get_ncpu_max();
 	int n = 0;
 
 	GetSystemInfo(&info);
